@@ -30,3 +30,7 @@ func NormalizeWord(word string) (string, bool) {
 
 	return normalized, true
 }
+
+func IsWhitespace(line string) bool {
+	return len(strings.TrimSpace(line)) == 0
+}

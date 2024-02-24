@@ -1,7 +1,8 @@
-package xkcd
+package builder
 
 import (
 	"github.com/h2non/gock"
+	"go-playground/pkg/xkcd"
 	"testing"
 )
 
@@ -22,9 +23,9 @@ func TestFetch(t *testing.T) {
 	tests := []struct {
 		name string
 		uri  string
-		want *Comic
+		want *xkcd.Comic
 	}{
-		{name: "valid", uri: "https://xkcd.com/1/info.0.json", want: &Comic{
+		{name: "valid", uri: "https://xkcd.com/1/info.0.json", want: &xkcd.Comic{
 			Num:        1,
 			Day:        "1",
 			Month:      "1",
@@ -44,7 +45,7 @@ func TestFetch(t *testing.T) {
 	}
 }
 
-func equals(a, b *Comic) bool {
+func equals(a, b *xkcd.Comic) bool {
 	if a == nil && b == nil {
 		return true
 	}

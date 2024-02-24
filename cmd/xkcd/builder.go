@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-const URL_BASE = "https://xkcd.com/"
+const UrlBase = "https://xkcd.com/"
 
 func main() {
 	errors := 0
@@ -21,6 +21,12 @@ func main() {
 	}
 
 	fmt.Println("Storing comics in:", store)
+	_, err := os.Stat(store)
+	if err == nil {
+		fmt.Fprintf(os.Stderr, "Store already exists, skipping index process\n")
+		return
+	}
+
 	file, err := os.Create(store)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating file: %v\n", err)
@@ -28,8 +34,8 @@ func main() {
 	}
 	defer file.Close()
 
-	for i := 1; i < 10; i++ {
-		url := fmt.Sprintf("%s%d/info.0.json", URL_BASE, i)
+	for i := 1; ; i++ {
+		url := fmt.Sprintf("%s%d/info.0.json", UrlBase, i)
 		comic := xkcd.Fetch(url)
 
 		if comic == nil {

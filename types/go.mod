@@ -1,4 +1,4 @@
-module go-playground
+module go-playground/types
 
 go 1.22
 
